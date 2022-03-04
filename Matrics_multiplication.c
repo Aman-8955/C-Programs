@@ -1,68 +1,79 @@
 #include <stdio.h>
+#include <stdlib.h>
 int main()
 {
-    int row1, col1, row2, col2, i, j, mat1[10][10], mat2[10][10];
-    printf("\n\nEnter your first matrix order:- \n");
-    printf("Row of matrix first:- ");
-    scanf("%d", &row1);
-    printf("Column of matrix first:- ");
-    scanf("%d", &col1);
-    printf("\n\nEnter your second matrix order:- \n");
-    printf("Row of matrix second:- ");
-    scanf("%d", &row2);
-    printf("Column of matrix second:- ");
-    scanf("%d", &col2);
-    if (col1 == row1)
+    int firstM, firstN, secondM, secondN, i, j;
+    printf("Enter your First matrix order(mxn):- ");
+    scanf("%d %d", &firstM, &firstN);
+    printf("Enter your Second matrix order(mxn):- ");
+    scanf("%d %d", &secondM, &secondN);
+    if (firstN != secondM)
     {
-        printf("*****Matrix Multiplication is possible*****");
+        printf("These matrix multiplication is not possible.....");
+        exit(0);
+    }
+    int mat1[firstM][firstN], mat2[secondM][secondN];
+    for (i = 0; i < firstM; i++)
+    {
+        for (j = 0; j < firstN; j++)
+        {
+            printf("Enter your %d%d element of first matrix:-", i, j);
+            scanf("%d", &mat1[i][j]);
+        }
+    }
+    printf("Your Entered matrix one is as following:-\n\n");
+    for (i = 0; i < firstM; i++)
+    {
+        for (j = 0; j < firstN; j++)
+        {
+            printf("%d ", mat1[i][j]);
+        }
         printf("\n\n");
-        for (i = 0; i < row1; i++)
-        {
-            for (j = 0; j < col1; j++)
-            {
-                printf("Enter your %d%d enlement of first matrix:-", i, j);
-                scanf("%d", &mat1[i][j]);
-            }
-        }
-        printf("\n\nYour Entered matrix one is as following:-\n\n");
-        for (i = 0; i < row1; i++)
-        {
-            for (j = 0; j < col1; j++)
-            {
-
-                printf("%d  ", mat1[i][j]);
-            }
-            printf("\n\n");
-        }
-        for (i = 0; i < row2; i++)
-        {
-            for (j = 0; j < col2; j++)
-            {
-                printf("Enter your %d%d enlement of secound matrix:-", i, j);
-                scanf("%d", &mat2[i][j]);
-            }
-        }
-        printf("\n\nYour Entered matrix two is as following:-\n\n");
-        for (i = 0; i < row2; i++)
-        {
-            for (j = 0; j < col2; j++)
-            {
-
-                printf("%d  ", mat2[i][j]);
-            }
-            printf("\n\n");
-        }
-        for (i = 0; i < row1; i++)
-        {
-            for (j = 0; j < col2; j++)
-            {
-                a[i][j]=mat1[i][j]*mat2[j][i];
-            }
-        }
     }
-    else
+
+    for (i = 0; i < secondM; i++)
     {
-        printf("\n\n*****Matrix Multiplication is not possible*****\n\n");
+        for (j = 0; j < secondN; j++)
+        {
+            printf("Enter your %d%d element of secound matrix:-", i, j);
+            scanf("%d", &mat2[i][j]);
+        }
     }
+    // Printing second matrix values
+    printf("Your Entered matrix two is as following:-\n\n");
+    for (i = 0; i < secondM; i++)
+    {
+        for (j = 0; j < secondN; j++)
+        {
+            printf("%d ", mat2[i][j]);
+        }
+        printf("\n\n");
+    }
+
+    printf("Your Multiplication of matrix is as following:-\n\n");
+    // Main Multiplication logic
+    int resultmat[firstM][secondN], k, temp, addtemp = 0;
+    for (i = 0; i < firstM; i++)
+    {
+        for (j = 0; j < secondN; j++, addtemp = 0)
+        {
+            for (k = 0; k < secondN; k++)
+            {
+                temp = mat1[i][k] * mat2[k][j];
+                addtemp += temp;
+            }
+            resultmat[i][j] = addtemp;
+        }
+    }
+    // Printing resulted matrix
+    for (i = 0; i < firstM; i++)
+    {
+        for (j = 0; j < secondN; j++)
+        {
+            printf("%d ", resultmat[i][j]);
+        }
+        printf("\n\n");
+    }
+
     return 0;
 }
